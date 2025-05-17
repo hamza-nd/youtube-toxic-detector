@@ -2,7 +2,11 @@ import requests
 import json
 from fastapi import FastAPI
 
+app = FastAPI()
 
+@app.get("/")
+def test():
+    return {"testing the api": "api tested"}
 
 url = "https://m.youtube.com/youtubei/v1/next?prettyPrint=false"
 
@@ -175,4 +179,9 @@ headers = {
 
 response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+@app.get("/comments")
+def comments():
+    response = requests.post(url, headers=headers, data=payload)
+    return response.json()
+
+
