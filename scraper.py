@@ -1,10 +1,13 @@
 import requests
 import json
 from urllib.parse import urlencode
+import re
+from bs4 import BeautifulSoup
 
 def get_channel_id_from_username(username):
     """
-    Convert a YouTube username to a channel ID using an external API.
+    Convert a YouTube username to a channel ID by trying different URL formats
+    and parsing the response.
 
     Args:
         username (str): YouTube username (without the @ symbol)
@@ -12,23 +15,54 @@ def get_channel_id_from_username(username):
     Returns:
         str: YouTube channel ID if successful, None otherwise
     """
-    base_url = "https://us-central1-youtube-channel-converter.cloudfunctions.net/channel-name-converter"
-    params = {
-        "channelInfo": username,
-        "conversionType": "name"
+    # Try different URL formats
+    urls_to_try = [
+        f"https://www.youtube.com/@{username}",
+        f"https://www.youtube.com/c/{username}",
+        f"https://www.youtube.com/user/{username}"
+    ]
+    
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
     }
-    url = f"{base_url}?{urlencode(params)}"
+
+    for url in urls_to_try:
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            if response.status_code == 200:
+                # Parse channel ID from the HTML
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                # Find meta tag with channel ID
+                meta_tag = soup.find('meta', {'itemprop': 'identifier'})
+                if meta_tag and 'content' in meta_tag.attrs:
+                    return meta_tag['content']
+                    
+                # Try alternate method - search for channel ID in the HTML
+                channel_id_match = re.search(r'"channelId":"([^"]+)"', response.text)
+                if channel_id_match:
+                    return channel_id_match.group(1)
+                    
+                # Another alternate method - search for externalId
+                external_id_match = re.search(r'"externalId":"([^"]+)"', response.text)
+                if external_id_match:
+                    return external_id_match.group(1)
+                    
+        except Exception as e:
+            print(f"Error trying URL {url}: {e}")
+            continue
+    
+    
 
     try:
         response = requests.get(url, timeout=10)
         if response.status_code == 200 and response.text:
             return response.text.strip()
-        else:
-            print(f"API Error: Status {response.status_code}")
-            return None
     except Exception as e:
-        print(f"Error converting username to channel ID: {e}")
-        return None
+        pass
+    
+    print(f"Could not find channel ID for username: {username}")
+    return None
 
 def get_channel_videos(username, max_videos=20):
     """
@@ -43,7 +77,8 @@ def get_channel_videos(username, max_videos=20):
     """
     channel_id = get_channel_id_from_username(username)
     if not channel_id:
-        raise Exception(f"Could not resolve channel ID for username: {username}")
+        print(f"Could not resolve channel ID for username: {username}")
+        return []
 
     url = "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false"
     original_url = f"https://www.youtube.com/channel/{channel_id}/videos"
@@ -82,7 +117,8 @@ def get_channel_videos(username, max_videos=20):
         response = requests.post(url, headers=headers, data=json.dumps(payload)).json()
         return extract_channel_videos(response, max_videos)
     except Exception as e:
-        raise Exception(f"Error fetching channel videos: {e}")
+        print(f"Error fetching channel videos: {e}")
+        return []
 
 def extract_channel_videos(data, max_videos=20):
     """
@@ -105,7 +141,8 @@ def extract_channel_videos(data, max_videos=20):
                 break
 
         if not contents:
-            raise Exception("No videos tab found or no videos available")
+            print("No videos tab found or no videos available")
+            return []
 
         results = []
         for item in contents:
@@ -138,7 +175,8 @@ def extract_channel_videos(data, max_videos=20):
         return results
 
     except Exception as e:
-        raise Exception(f"Error extracting videos: {e}")
+        print(f"Error extracting videos: {e}")
+        return []
 
 if __name__ == "__main__":
     print("\nFetching videos for the channels")
@@ -147,7 +185,12 @@ if __name__ == "__main__":
         for channel in channels:
             print(f"\nFetching for: {channel}")
             videos = get_channel_videos(channel, max_videos=5)
-            print(json.dumps(videos, indent=2))
+            if videos:
+                print(json.dumps(videos, indent=2))
+            else:
+                print(f"No videos found for channel: {channel}")
             print("----------------------------------------")
     except Exception as e:
         print(f"Error: {e}")
+
+
