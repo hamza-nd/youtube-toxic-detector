@@ -1,6 +1,6 @@
 // API URL configuration
 const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://youtube-hamza-iy7flt9vc-hamza-nds-projects.vercel.app/'  // Replace with your Vercel backend URL
+    ? 'https://youtube-video-analyzer.vercel.app/api'  // Replace with your actual Vercel URL
     : 'http://localhost:8000/api';
 
 // Check if user is logged in
