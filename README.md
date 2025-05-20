@@ -1,31 +1,48 @@
-# YouTube Toxic Comment Detector
+# YouTube Video Analyzer
 
-A tool for analyzing YouTube comments to detect toxicity and generate insights using BERT and Gemini AI.
+A web application that allows users to analyze YouTube videos from a channel, providing insights into video statistics and trends.
 
 ## Features
 
-- Scrape comments from YouTube videos
-- Detect toxic comments using BERT
-- Generate insights and recommendations using Gemini AI
-- Store and analyze data in MongoDB
-- Support for analyzing multiple videos from a channel
+- User authentication (signup/login)
+- YouTube channel video scraping
+- Video statistics dashboard
+- Interactive charts for views and duration analysis
+- Responsive design with dark mode support
+
+## Tech Stack
+
+### Backend
+- FastAPI (Python)
+- MySQL Database
+- YouTube Data API
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+- Chart.js for data visualization
 
 ## Project Structure
 
 ```
 youtube-toxic-detector/
-├── config/
-│   └── config.py           # Configuration and API keys
+├── Frontend/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── styles.css
+│   └── js/
+│       ├── auth.js
+│       └── dashboard.js
 ├── src/
+│   ├── api/
+│   │   └── main.py
 │   ├── scrapers/
-│   │   ├── video_scraper.py    # YouTube video scraper
-│   │   └── comment_scraper.py  # YouTube comment scraper
-│   ├── analysis/
-│   │   ├── toxicity_detector.py # BERT-based toxicity detection
-│   │   └── gemini_analyzer.py   # Gemini AI analysis
+│   │   └── video_scraper.py
 │   └── utils/
-│       └── db_handler.py        # Database operations
+│       └── db_handler.py
 ├── requirements.txt
+├── vercel.json
 └── README.md
 ```
 
@@ -37,64 +54,47 @@ git clone https://github.com/yourusername/youtube-toxic-detector.git
 cd youtube-toxic-detector
 ```
 
-2. Create and activate a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Create a `.env` file in the root directory with your API keys:
+3. Set up environment variables:
+Create a `.env` file in the root directory with the following variables:
 ```
-YOUTUBE_API_KEY=your_youtube_api_key_here
-MONGODB_URI=mongodb://localhost:27017
-GEMINI_API_KEY=your_gemini_api_key_here
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=your_database_name
+YOUTUBE_API_KEY=your_youtube_api_key
+```
+
+4. Deploy to Vercel:
+```bash
+vercel
 ```
 
 ## Usage
 
-1. Scrape videos from a channel:
-```python
-from src.scrapers.video_scraper import fetch_channel_videos
+1. Open the application in your browser
+2. Sign up for a new account or log in
+3. Enter a YouTube channel URL and the number of videos to analyze
+4. View the dashboard with video statistics and charts
 
-videos = fetch_channel_videos(channel_id="YOUR_CHANNEL_ID", max_videos=50)
-```
+## API Endpoints
 
-2. Scrape comments from videos:
-```python
-from src.scrapers.comment_scraper import CommentScraper
+- `POST /api/signup` - Create a new user account
+- `POST /api/login` - Authenticate user
+- `POST /api/scrape` - Scrape videos from a YouTube channel
 
-scraper = CommentScraper()
-comments = scraper.get_comments_for_videos(video_ids)
-```
+## Contributing
 
-3. Analyze comments for toxicity:
-```python
-from src.analysis.toxicity_detector import ToxicityDetector
-
-detector = ToxicityDetector()
-toxic_comments = detector.get_toxic_comments()
-```
-
-4. Generate insights using Gemini:
-```python
-from src.analysis.gemini_analyzer import GeminiAnalyzer
-
-analyzer = GeminiAnalyzer()
-analysis = analyzer.generate_insights(toxic_comments)
-```
-
-## Requirements
-
-- Python 3.8+
-- MongoDB
-- YouTube Data API key
-- Gemini API key
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT License
+This project is licensed under the MIT License - see the LICENSE file for details.

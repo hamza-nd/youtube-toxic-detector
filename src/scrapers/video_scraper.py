@@ -191,7 +191,7 @@ def fetch_channel_videos(channel_url, max_videos=50):
                         break
             
             # Add a small delay to avoid rate limiting
-            time.sleep(0.5)
+            time.sleep(1)
         
         print(f"Total videos collected: {len(results)}")
         
@@ -217,69 +217,52 @@ def fetch_channel_videos(channel_url, max_videos=50):
 
 def process_videos(contents, id_counter, results, max_videos):
     """
-    Process video items and extract relevant information
+    Process video contents and extract video information
     
     Args:
-        contents (list): List of content items from YouTube response
-        id_counter (int): Current ID counter
-        results (list): Current results list
-        max_videos (int): Maximum number of videos to collect
+        contents (list): List of video content items
+        id_counter (int): Counter for generating unique IDs
+        results (list): List to store video information
+        max_videos (int): Maximum number of videos to process
         
     Returns:
-        tuple: Updated id_counter, results list, and continuation token (if any)
+        tuple: (id_counter, results, continuation_token)
     """
     continuation_token = None
     
     for item in contents:
-        # Check if this is a continuation item
-        if "continuationItemRenderer" in item:
-            continuation_data = item.get("continuationItemRenderer", {}).get("continuationEndpoint", {}).get("continuationCommand", {})
-            continuation_token = continuation_data.get("token")
-            continue
+        if len(results) >= max_videos:
+            break
             
-        # Process video item
-        rich_item = item.get("richItemRenderer", {}).get("content", {})
-        video = rich_item.get("videoRenderer")
-
-        if video:
-            video_id = video.get("videoId")
-            title = video.get("title", {}).get("runs", [{}])[0].get("text", "No title")
-            thumbnails = video.get("thumbnail", {}).get("thumbnails", [])
-            first_thumbnail = thumbnails[-1]["url"] if thumbnails else None
-
-            length_text = video.get("lengthText", {}).get("simpleText", "Unknown")
-            view_count = video.get("viewCountText", {}).get("simpleText", "Unknown")
-            publish_time = video.get("publishedTimeText", {}).get("simpleText", "Unknown")
-
+        if "richItemRenderer" in item:
+            video_data = item["richItemRenderer"].get("content", {}).get("videoRenderer", {})
+            if not video_data:
+                continue
+                
+            # Extract video information
+            video_id = video_data.get("videoId", "")
+            title = video_data.get("title", {}).get("runs", [{}])[0].get("text", "")
+            thumbnail = video_data.get("thumbnail", {}).get("thumbnails", [{}])[-1].get("url", "")
+            length = video_data.get("lengthText", {}).get("simpleText", "0:00")
+            views = int(video_data.get("viewCountText", {}).get("simpleText", "0").replace(",", "").replace(" views", ""))
+            published = video_data.get("publishedTimeText", {}).get("simpleText", "")
+            url = f"https://www.youtube.com/watch?v={video_id}"
+            
+            # Add video to results
             results.append({
-                "videoId": video_id,
+                "videoid": video_id,
                 "title": title,
-                "thumbnail": first_thumbnail,
-                "length": length_text,
-                "views": view_count,
-                "published": publish_time,
-                "url": f"https://www.youtube.com/watch?v={video_id}",
-                "id": id_counter
+                "thumbnail": thumbnail,
+                "length": length,
+                "views": views,
+                "published": published,
+                "url": url
             })
+            
             id_counter += 1
-
-            if len(results) >= max_videos:
-                break
+            
+        elif "continuationItemRenderer" in item:
+            continuation_token = item["continuationItemRenderer"].get("continuationEndpoint", {}).get("continuationCommand", {}).get("token")
     
     return id_counter, results, continuation_token
 
-if __name__ == "__main__":
-    # Example usage with different channel URL formats
-    channel_urls = [
-        "https://www.youtube.com/c/ChannelName",
-        "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw",
-        "https://www.youtube.com/@ChannelName",
-        "https://www.youtube.com/user/ChannelName"
-    ]
-    
-    # Test with the first URL
-    channel_url = channel_urls[1]  # Using Google Developers channel as example
-    print(f"Fetching videos from: {channel_url}")
-    videos = fetch_channel_videos(channel_url, max_videos=50)
-    print(f"Retrieved {len(videos)} videos from {channel_url}")
-    print(f"Results saved to data/videos.json")
