@@ -1,6 +1,6 @@
 // API URL configuration
 const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://youtube-hamza.vercel.app/api'
+    ? 'https://youtube-toxic-detector.vercel.app/api'
     : 'http://localhost:8000/api';
 
 // Check if user is logged in
