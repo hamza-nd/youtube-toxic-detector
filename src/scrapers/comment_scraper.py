@@ -167,9 +167,95 @@ headers = {
   'x-youtube-bootstrap-logged-in': 'true',
   'x-youtube-client-name': '2',
   'x-youtube-client-version': '2.20250516.01.00',
-  'Cookie': 'LOGIN_INFO=AFmmF2swRQIhAI7NrxeLDax8Fux6aNIKew9gPZ5r6WkAFqSLsXbQoK2rAiApNxyiC0d2VMv30AvjcpMXg2KLhlaLWEUnV3b508MIRw:QUQ3MjNmemF2MDJDVWtWcEd1cXlSUFZKdWpZSGhEOU1Nc2hwX2hveUhvdzhwb3RQaWRSLWItUDVVQnhYNzRWR3dfV1Atc3VBeU8wM0t1TEdGakZBY2hmeFd2cE9aV2RxelVGN0hxTzM1LWhwMHlId3ZUVVRuUlZpV3d3clpRR1NmdTM3TGRINXIyQ2QyMTVQbFYzYTAxNGZlY0VMNW11Rjhn; VISITOR_INFO1_LIVE=f4UvBEm4t5k; VISITOR_PRIVACY_METADATA=CgJMQhIEGgAgZw%3D%3D; HSID=AAH2STxXK1nDbNrpI; SSID=AgclPAMoOifsdxwvD; APISID=MLkUDswvs1WuHOH-/AvL19Ui7VaLSOtiKT; SAPISID=Y2oZAsk8-goWQUi-/AVBCja2Ym-q2or8lT; __Secure-1PAPISID=Y2oZAsk8-goWQUi-/AVBCja2Ym-q2or8lT; __Secure-3PAPISID=Y2oZAsk8-goWQUi-/AVBCja2Ym-q2or8lT; SID=g.a000wwh-Lo2elRKrf35h7bfJbDgfObx9Y5QN7bpO9Qa4FAbXtbkOeX1-GUkzaIrHHrhj0hOxwAACgYKAdUSARASFQHGX2MiY_xSkAS9235rLpZOR3eqXxoVAUF8yKpbYthBzENDoxPaNl4Pgwu60076; __Secure-1PSID=g.a000wwh-Lo2elRKrf35h7bfJbDgfObx9Y5QN7bpO9Qa4FAbXtbkOAArsfrUlIu1hQs6xaz4JwwACgYKAYASARASFQHGX2MiWe2Vece4FESXgrz1aQhwVBoVAUF8yKox9jdo5lEHHfgYyMGjBLPh0076; __Secure-3PSID=g.a000wwh-Lo2elRKrf35h7bfJbDgfObx9Y5QN7bpO9Qa4FAbXtbkOQJVc-Z3mCZ6YQvK-FGU50wACgYKAd4SARASFQHGX2MiNajrSk23hF_33gdYAgKveBoVAUF8yKrLOvxvo6H5deS3ZWfGAAcI0076; YSC=l1xS9dzjh5Y; __Secure-ROLLOUT_TOKEN=CMnHy-Cl47GKowEQo4DPkcejjAMYrtvI_ZSqjQM%3D; PREF=f4=4000000&tz=Asia.Beirut&f7=100&f5=20000; __Secure-1PSIDTS=sidts-CjIBjplskM75aw8zEAwT597GDrNH4abYl7SBxxtOL_-Qa_byLz5AHaEjdZbgA9-jqtz1xRAA; __Secure-3PSIDTS=sidts-CjIBjplskM75aw8zEAwT597GDrNH4abYl7SBxxtOL_-Qa_byLz5AHaEjdZbgA9-jqtz1xRAA; SIDCC=AKEyXzXiq_ru-wEGdaNgYNXqe0WaHXbR-T1wBjXayciGPfpunTwI2pbRz7Is-1lon1aQLcI--A; __Secure-1PSIDCC=AKEyXzVl1ewpmZQDyAT1rBeRkCdJzm9MEMy_zidyToMrk3ZvXQc5bgdRcZtSw3L0uf6B33QKrw; __Secure-3PSIDCC=AKEyXzXCiun8EwOHpYVKvTAUn4whaw1ulPAuxYcyjB8A1v93XMDXXLlnS9UeBpjncg28ToGOqPw; SIDCC=AKEyXzUrUkh_kVLwdRPRiL-SKd566cJa7QzzJBK_fBaPCf1pzZH6nzb1UkhU0k0IFJKiYW-qvg; __Secure-1PSIDCC=AKEyXzUmK5hh5U4EMDgnrW0sYeeJcV_n77YFAm3yErIFDAik5772-9-BStiQ-vnfRaim8BQbyg; __Secure-3PSIDCC=AKEyXzWZPvRVa5E7KndS01QVaEehLgQGvmRqXqbKxILQVlQWAoxnm2IqniB4JGmo0BBBRePQ5wM'
+  'Cookie': 'LOGIN_INFO=AFmmF2swRQIhAI7NrxeLDax8Fux6aNIKew9gPZ5r6WkAFqSLsXbQoK2rAiApNxyiC0d2VMv30AvjcpMXg2KLhlaLWEUnV3b508MIRw:QUQ3MjNmemF2MDJDVWtWcEd1cXlSUFZKdWpZSGhEOU1Nc2hwX2hveUhvdzhwb3RQaWRSLWItUDVVQnhYNzRWR3dfV1Atc3VBeU8wM0t1TEdGakZBY2hmeFd2cE9aV2RxelVGN0hxTzM1LWhwMHlId3ZUVVRuUlZpV3d3clpRR1NmdTM3TGRINXIyQ2QyMTVQbFYzYTAxNGZlY0VMNW11Rjhn; VISITOR_INFO1_LIVE=f4UvBEm4t5k; VISITOR_PRIVACY_METADATA=CgJMQhIEGgAgZw%3D%3D; HSID=AAH2STxXK1nDbNrpI; SSID=AgclPAMoOifsdxwvD; APISID=MLkUDswvs1WuHOH-/AvL19Ui7VaLSOtiKT; SAPISID=Y2oZAsk8-goWQUi-/AVBCja2Ym-q2or8lT; __Secure-1PAPISID=Y2oZAsk8-goWQUi-/AVBCja2Ym-q2or8lT; __Secure-3PAPISID=Y2oZAsk8-goWQUi-/AVBCja2Ym-q2or8lT; SID=g.a000wwh-Lo2elRKrf35h7bfJbDgfObx9Y5QN7bpO9Qa4FAbXtbkOeX1-GUkzaIrHHrhj0hOxwAACgYKAdUSARASFQHGX2MiY_xSkAS9235rLpZOR3eqXxoVAUF8yKpbYthBzENDoxPaNl4Pgwu60076; __Secure-1PSID=g.a000wwh-Lo2elRKrf35h7bfJbDgfObx9Y5QN7bpO9Qa4FAbXtbkOAArsfrUlIu1hQs6xaz4JwwACgYKAYASARASFQHGX2MiWe2Vece4FESXgrz1aQhwVBoVAUF8yKox9jdo5lEHHfgYyMGjBLPh0076; __Secure-3PSID=g.a000wwh-Lo2elRKrf35h7bfJbDgfObx9Y5QN7bpO9Qa4FAbXtbkOQJVc-Z3mCZ6YQvK-FGU50wACgYKAd4SARASFQHGX2MiNajrSk23hF_33gdYAgKveBoVAUF8yKrLOvxvo6H5deS3ZWfGAAcI0076; YSC=l1xS9dzjh5Y; __Secure-ROLLOUT_TOKEN=CMnHy-Cl47GKowEQo4DPkcejjAMYrtvI_ZSqjQM%3D; PREF=f4=4000000&tz=Asia.Beirut&f7=100&f5=20000; __Secure-1PSIDTS=sidts-CjIBjplskM75aw8zEAwT597GDrNH4abYl7SBxxtOL_-Qa_byLz5AHaEjdZbgA9-jqtz1xRAA; __Secure-3PSIDTS=sidts-CjIBjplskM75aw8zEAwT597GDrNH4abYl7SBxxtOL_-Qa_byLz5AHaEjdZbgA9-jqtz1xRAA; SIDCC=AKEyXzXiq_ru-wEGdaNgYNXqe0WaHXbR-T1wBjXayciGPfpunTwI2pbRz7Is-1lon1aQLcI--A; __Secure-1PSIDCC=AKEyXzVl1ewpmZQDyAT1rBeRkCdJzm9MEMy_zidyToMrk3ZvXQc5bgdRcZtSw3L0uf6B33QKrw; __Secure-3PSIDCC=AKEyXzXCiun8EwOHpYVKvTAUn4whaw1ulPAuxYcyjB8A1v93XMDXXLlnS9UeBpjncg28ToGOqPw; SIDCC=AKEyXzUDwK3MyYat64aCclog9mYZ-uU8iCC4Crac6E84-027PkkF0a23r8zhP1-_YFmXJ24qDQ; __Secure-1PSIDCC=AKEyXzUHbKHmxyYJcPZuATOkKlM4VO2uUxnCrWHLVOzjAZ3ZhrZpzjhWExjStOnCeTGkCAOdKg; __Secure-3PSIDCC=AKEyXzXiUgvNwGwO2dT_zQ__koyCteuqQ-74QdR47j8rnos-C_eNiHfPrBAI8zEUQ_z5fOaS0yY'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
+response = requests.request("POST", url, headers=headers, data=payload).json()
 
-print(response.text)
+
+import json
+
+# Parse the JSON data from paste-2.txt
+def extract_comments(json_data):
+    comments = []
+    
+    # Check if we have a valid JSON response
+    if not json_data:
+        return "No valid JSON data found"
+    
+    # Try to locate comment threads in the response
+    try:
+        # The main response has onResponseReceivedEndpoints containing continuationItems
+        endpoints = json_data.get("onResponseReceivedEndpoints", [])
+        
+        for endpoint in endpoints:
+            # Look for reloadContinuationItemsCommand which contains the comments
+            if "reloadContinuationItemsCommand" in endpoint:
+                continuation_items = endpoint["reloadContinuationItemsCommand"].get("continuationItems", [])
+                
+                for item in continuation_items:
+                    # Check if this is a comment thread
+                    if "commentThreadRenderer" in item:
+                        thread = item["commentThreadRenderer"]
+                        
+                        # Extract the main comment
+                        if "comment" in thread and "commentRenderer" in thread["comment"]:
+                            comment_renderer = thread["comment"]["commentRenderer"]
+                            
+                            # Extract author info
+                            author = ""
+                            if "authorText" in comment_renderer and "runs" in comment_renderer["authorText"]:
+                                author = comment_renderer["authorText"]["runs"][0]["text"]
+                            
+                            # Extract comment text
+                            text = ""
+                            if "contentText" in comment_renderer and "runs" in comment_renderer["contentText"]:
+                                text = comment_renderer["contentText"]["runs"][0]["text"]
+                            
+                            # Extract timestamp
+                            time = ""
+                            if "publishedTimeText" in comment_renderer and "runs" in comment_renderer["publishedTimeText"]:
+                                time = comment_renderer["publishedTimeText"]["runs"][0]["text"]
+                            
+                            # Extract like count
+                            likes = ""
+                            if "voteCount" in comment_renderer and "runs" in comment_renderer["voteCount"]:
+                                likes = comment_renderer["voteCount"]["runs"][0]["text"]
+                            
+                            # Extract reply count
+                            replies = ""
+                            if "replyCount" in comment_renderer:
+                                replies = str(comment_renderer["replyCount"])
+                            
+                            comment_info = {
+                                "author": author,
+                                "text": text,
+                                "time": time,
+                                "likes": likes,
+                                "replies": replies
+                            }
+                            
+                            comments.append(comment_info)
+    
+    except Exception as e:
+        return f"Error parsing comments: {str(e)}"
+    
+    return comments
+
+# Load the JSON data from the provided content
+try:
+    
+    data = response
+    comments = extract_comments(data)
+    
+    print(f"Found {len(comments)} comments:")
+    for i, comment in enumerate(comments, 1):
+        print(f"\nComment {i}:")
+        print(f"Author: {comment['author']}")
+        print(f"Text: {comment['text']}")
+        print(f"Time: {comment['time']}")
+        print(f"Likes: {comment['likes']}")
+        print(f"Replies: {comment['replies']}")
+        
+except Exception as e:
+    print(f"Error: {str(e)}")
