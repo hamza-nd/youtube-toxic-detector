@@ -13,4 +13,6 @@ def analyze_with_gemini(title):
     }
     response = requests.post(url, headers=headers, json=payload)
     response.raise_for_status()
-    return response.json() 
+    gemini_result = response.json()
+    print("Gemini response:", gemini_result)
+    return gemini_result 
