@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 import hashlib
 import os
-from src.utils.db_handler import create_connection, insert_user, get_user_by_username, insert_scraped_data
+from src.utils.db_handler import create_connection, insert_user, get_user_by_username, insert_scraped_data, create_tables
 from src.scrapers.video_scraper import fetch_channel_videos  # Import the actual video scraper
 
 # Create FastAPI app
@@ -198,4 +198,6 @@ async def root():
 # Add a test endpoint for the scrape functionality
 @app.get("/api/test")
 async def test():
-    return {"message": "API endpoints are working"} 
+    return {"message": "API endpoints are working"}
+
+create_tables() 

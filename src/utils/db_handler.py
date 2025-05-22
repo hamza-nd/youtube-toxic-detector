@@ -5,6 +5,8 @@ import re
 
 db_url = os.environ.get("DATABASE_URL")
 
+print(f"DATABASE_URL: {db_url}")
+
 def parse_mysql_url(url):
     # Example: mysql://user:password@host:port/database
     pattern = r"mysql:\/\/(.*?):(.*?)@(.*?):(\d+)\/(.*)"
@@ -22,20 +24,22 @@ def parse_mysql_url(url):
 
 def create_connection():
     try:
-        if db_url:
-            params = parse_mysql_url(db_url)
-            connection = mysql.connector.connect(
-                host=params["host"],
-                user=params["user"],
-                password=params["password"],
-                database=params["database"],
-                port=params["port"]
-            )
-        
-            
+        if not db_url:
+            raise ValueError("DATABASE_URL environment variable not set")
+        params = parse_mysql_url(db_url)
+        connection = mysql.connector.connect(
+            host=params["host"],
+            user=params["user"],
+            password=params["password"],
+            database=params["database"],
+            port=params["port"]
+        )
         return connection
     except Error as e:
         print(f"Error connecting to MySQL: {e}")
+        return None
+    except Exception as e:
+        print(f"General error: {e}")
         return None
 
 def create_tables():
