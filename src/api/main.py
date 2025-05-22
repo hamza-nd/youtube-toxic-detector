@@ -13,7 +13,7 @@ app = FastAPI(title="YouTube Toxic Detector API")
 # Enable CORS with specific origins
 origins = [
     "http://localhost:3000",
-    "https://your-frontend-domain.vercel.app",  # Add your frontend Vercel domain here
+    "https://youtube-toxic-detector.vercel.app/",
 ]
 
 app.add_middleware(

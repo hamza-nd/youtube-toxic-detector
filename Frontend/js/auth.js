@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://youtube-toxic-detector.onrender.com/api/login/...';
 
 // Function to handle signup
 async function handleSignup(event) {
