@@ -1,7 +1,5 @@
 // API URL configuration
-const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://youtube-toxic-detector.vercel.app/api'
-    : 'http://localhost:8000/api';
+const API_URL = 'https://youtube-toxic-detector.onrender.com/api';
 
 // Check if user is logged in
 document.addEventListener('DOMContentLoaded', () => {
