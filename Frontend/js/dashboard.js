@@ -195,6 +195,10 @@ function updateVideoGrid(videos) {
                     <span>${formatNumber(video.views)} views</span>
                     <span>${video.length}</span>
                 </div>
+                <div class="gemini-analysis">
+                    <strong>Gemini Analysis:</strong>
+                    <span>${video.gemini_analysis?.candidates?.[0]?.content?.parts?.[0]?.text || 'N/A'}</span>
+                </div>
             </div>
         `;
         grid.appendChild(card);

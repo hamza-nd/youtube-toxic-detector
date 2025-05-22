@@ -6,6 +6,7 @@ import hashlib
 import os
 from src.utils.db_handler import create_connection, insert_user, get_user_by_username, insert_scraped_data, create_tables
 from src.scrapers.video_scraper import fetch_channel_videos  # Import the actual video scraper
+from src.utils.gemini import analyze_with_gemini
 
 # Create FastAPI app
 app = FastAPI(title="YouTube Toxic Detector API")
@@ -129,6 +130,16 @@ async def scrape_videos(request: ScrapeRequest):
         
         if not scraped_data:
             raise HTTPException(status_code=400, detail="Failed to scrape videos from the channel")
+        
+        # Analyze each video with Gemini
+        for video in scraped_data:
+            try:
+                # You can concatenate title and description if available
+                text = video['title']
+                gemini_result = analyze_with_gemini(text)
+                video['gemini_analysis'] = gemini_result
+            except Exception as e:
+                video['gemini_analysis'] = {'error': str(e)}
         
         # Calculate statistics
         total_views = sum(video['views'] for video in scraped_data)
