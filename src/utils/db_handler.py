@@ -1,14 +1,38 @@
 import mysql.connector
 from mysql.connector import Error
+import os
+import re
+
+db_url = os.environ.get("DATABASE_URL")
+
+def parse_mysql_url(url):
+    # Example: mysql://user:password@host:port/database
+    pattern = r"mysql:\/\/(.*?):(.*?)@(.*?):(\d+)\/(.*)"
+    match = re.match(pattern, url)
+    if not match:
+        raise ValueError("Invalid DATABASE_URL format")
+    user, password, host, port, database = match.groups()
+    return {
+        "user": user,
+        "password": password,
+        "host": host,
+        "port": int(port),
+        "database": database
+    }
 
 def create_connection():
     try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="1234",
-            database="youtube"
-        )
+        if db_url:
+            params = parse_mysql_url(db_url)
+            connection = mysql.connector.connect(
+                host=params["host"],
+                user=params["user"],
+                password=params["password"],
+                database=params["database"],
+                port=params["port"]
+            )
+        
+            )
         return connection
     except Error as e:
         print(f"Error connecting to MySQL: {e}")
