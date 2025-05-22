@@ -32,7 +32,7 @@ def create_connection():
                 port=params["port"]
             )
         
-            )
+            
         return connection
     except Error as e:
         print(f"Error connecting to MySQL: {e}")
